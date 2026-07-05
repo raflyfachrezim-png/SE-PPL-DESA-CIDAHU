@@ -2,39 +2,46 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Kalkulator SE 2026</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="header">
-  <h1>📊 KALKULATOR SE 2026</h1>
-  <p>PPL DESA CIDAHU</p>
-</div>
+<div class="container">
+  <div class="header">
+    <h1>📊 KALKULATOR SE 2026</h1>
+    <p>PPL DESA CIDAHU</p>
+  </div>
 
-<div class="card">
-  <h2>📋 Parameter Input</h2>
-  
-  <label for="sektor">Pilih Sektor:</label>
-  <select id="sektor" onchange="updateSubSektor()">
-    <option value="pertanian">Pertanian</option>
-    <option value="perdagangan">Perdagangan</option>
-    <option value="peternakan">Peternakan</option>
-  </select>
+  <div class="card">
+    <h2>📋 Parameter Input</h2>
+    
+    <label for="sektor">Pilih Sektor:</label>
+    <select id="sektor" onchange="updateSubSektor()">
+      <option value="pertanian">Pertanian</option>
+      <option value="perdagangan">Perdagangan</option>
+      <option value="peternakan">Peternakan</option>
+    </select>
 
-  <label for="subsektor" id="label-subsektor">Pilih Komoditas:</label>
-  <select id="subsektor"></select>
+    <label for="subsektor" id="label-subsektor">Pilih Komoditas:</label>
+    <select id="subsektor"></select>
 
-  <label for="input-utama" id="label-input-utama">Luas Lahan (m²):</label>
-  <input id="input-utama" type="number" value="1000">
+    <label for="input-utama" id="label-input-utama">Luas Lahan (m²):</label>
+    <!-- Diubah ke type text agar inputmask dengan titik berjalan lancar di hp -->
+    <input id="input-utama" type="text" value="1.000" inputmode="numeric">
 
-  <button onclick="hitungEstimasi()">HITUNG ESTIMASI</button>
-</div>
+    <button onclick="hitungEstimasi()">HITUNG ESTIMASI</button>
+  </div>
 
-<div class="card">
-  <h2>💰 Hasil Analisis</h2>
-  <div id="output">Silahkan masukkan data dan klik Hitung Estimasi.</div>
+  <div class="card">
+    <h2>💰 Hasil Analisis</h2>
+    <div id="output" class="output-placeholder">Silahkan masukkan data dan klik Hitung Estimasi.</div>
+  </div>
+
+  <div class="watermark">
+    by Rafly Fachrezi Desa Cidahu
+  </div>
 </div>
 
 <script src="database.js"></script>
