@@ -1,4 +1,3 @@
-// Mengatur perubahan input saat sektor diganti
 function updateSubSektor() {
   const sektor = document.getElementById("sektor").value;
   const subSektorSelect = document.getElementById("subsektor");
@@ -11,7 +10,8 @@ function updateSubSektor() {
   if (sektor === "pertanian") {
     labelSubSektor.innerText = "Pilih Komoditas:";
     labelInputUtama.innerText = "Luas Lahan (m²):";
-    inputUtama.value = "1000";
+    inputUtama.type = "text"; // Diubah ke text agar bisa pakai format titik
+    inputUtama.value = "1.000";
     
     for (let key in dataPatokan.pertanian) {
       subSektorSelect.innerHTML += `<option value="${key}">${dataPatokan.pertanian[key].nama}</option>`;
@@ -19,7 +19,8 @@ function updateSubSektor() {
   } else if (sektor === "perdagangan") {
     labelSubSektor.innerText = "Pilih Jenis Usaha:";
     labelInputUtama.innerText = "Estimasi Omset per Hari (Rp):";
-    inputUtama.value = "100000";
+    inputUtama.type = "text";
+    inputUtama.value = "100.000";
 
     for (let key in dataPatokan.perdagangan) {
       subSektorSelect.innerHTML += `<option value="${key}">${dataPatokan.perdagangan[key].nama}</option>`;
@@ -27,6 +28,7 @@ function updateSubSektor() {
   } else if (sektor === "peternakan") {
     labelSubSektor.innerText = "Pilih Jenis Ternak:";
     labelInputUtama.innerText = "Jumlah Ternak (Ekor):";
+    inputUtama.type = "text";
     inputUtama.value = "1";
 
     for (let key in dataPatokan.peternakan) {
@@ -35,7 +37,17 @@ function updateSubSektor() {
   }
 }
 
-// Format mata uang rupiah
+// Fungsi untuk memformat input secara realtime saat diketik (Auto Thousand Separator)
+function formatInputRibuan(e) {
+  let value = e.target.value.replace(/\D/g, ""); // Hapus semua karakter non-angka
+  if (value === "") {
+    e.target.value = "";
+    return;
+  }
+  // Ubah ke format ribuan dengan titik
+  e.target.value = parseInt(value, 10).toLocaleString("id-ID");
+}
+
 function formatRupiah(angka) {
   return "Rp " + Math.round(angka).toLocaleString("id-ID");
 }
@@ -43,16 +55,19 @@ function formatRupiah(angka) {
 function hitungEstimasi() {
   const sektor = document.getElementById("sektor").value;
   const subsektor = document.getElementById("subsektor").value;
-  const valInput = parseFloat(document.getElementById("input-utama").value) || 0;
+  
+  // Ambil nilai input, hapus semua titik agar kembali jadi angka murni sebelum dihitung
+  let rawValue = document.getElementById("input-utama").value.replace(/\./g, "");
+  const valInput = parseFloat(rawValue) || 0;
+  
   const outputDiv = document.getElementById("output");
 
   let itemData = dataPatokan[sektor][subsektor];
-  let htmlResult = `<h3>Hasil Analisis: ${itemData.nama}</h3>`;
+  let htmlResult = `<h3 style="font-size:15px; margin-top:0; color:#1d4ed8;">Hasil Analisis: ${itemData.nama}</h3>`;
 
   if (sektor === "pertanian") {
     let faktorLahan = valInput / 1000;
     
-    // Per Musim
     let upahM = itemData.upah * faktorLahan;
     let prodM = itemData.produksi * faktorLahan;
     let operM = itemData.operasional * faktorLahan;
@@ -61,7 +76,6 @@ function hitungEstimasi() {
     let totalBebanM = upahM + prodM + operM + nonOpM;
     let labaM = pendM - totalBebanM;
 
-    // Per Tahun
     let kaliPanen = itemData.panen_per_tahun;
     let upahT = upahM * kaliPanen;
     let prodT = prodM * kaliPanen;
@@ -73,25 +87,25 @@ function hitungEstimasi() {
     let margin = pendT ? ((labaT / pendT) * 100).toFixed(2) : 0;
 
     htmlResult += `
-      <p>Intensitas Panen: <b>${kaliPanen} kali / tahun</b></p>
-      <table>
-        <tr><th>Rincian</th><th>Per Musim</th><th>Per Tahun</th></tr>
-        <tr><td>Upah Pekerja</td><td>${formatRupiah(upahM)}</td><td>${formatRupiah(upahT)}</td></tr>
-        <tr><td>Biaya Produksi</td><td>${formatRupiah(prodM)}</td><td>${formatRupiah(prodT)}</td></tr>
-        <tr><td>Biaya Operasional</td><td>${formatRupiah(operM)}</td><td>${formatRupiah(operT)}</td></tr>
-        <tr><td>Biaya Non Operasional</td><td>${formatRupiah(nonOpM)}</td><td>${formatRupiah(nonOpT)}</td></tr>
-        <tr><td><b>Total Pengeluaran</b></td><td><b>${formatRupiah(totalBebanM)}</b></td><td><b>${formatRupiah(totalBebanT)}</b></td></tr>
-        <tr><td><b>Total Pendapatan</b></td><td><b>${formatRupiah(pendM)}</b></td><td><b>${formatRupiah(pendT)}</b></td></tr>
-        <tr class="highlight-laba"><td>Laba Bersih</td><td>${formatRupiah(labaM)}</td><td>${formatRupiah(labaT)}</td></tr>
-      </table>
-      <p><b>Margin Keuntungan:</b> ${margin}%</p>
+      <p style="font-size:13px; margin: 5px 0 10px 0;">Intensitas Panen: <b>${kaliPanen} kali / tahun</b></p>
+      <div class="table-container">
+        <table>
+          <tr><th>Rincian</th><th>Per Musim</th><th>Per Tahun</th></tr>
+          <tr><td>Upah Pekerja</td><td>${formatRupiah(upahM)}</td><td>${formatRupiah(upahT)}</td></tr>
+          <tr><td>Biaya Produksi</td><td>${formatRupiah(prodM)}</td><td>${formatRupiah(prodT)}</td></tr>
+          <tr><td>Biaya Operasional</td><td>${formatRupiah(operM)}</td><td>${formatRupiah(operT)}</td></tr>
+          <tr><td>Biaya Non Op</td><td>${formatRupiah(nonOpM)}</td><td>${formatRupiah(nonOpT)}</td></tr>
+          <tr style="font-weight:600; background:#f8fafc;"><td>Total Beban</td><td>${formatRupiah(totalBebanM)}</td><td>${formatRupiah(totalBebanT)}</td></tr>
+          <tr style="font-weight:600;"><td>Pendapatan</td><td>${formatRupiah(pendM)}</td><td>${formatRupiah(pendT)}</td></tr>
+          <tr class="highlight-laba"><td>Laba Bersih</td><td>${formatRupiah(labaM)}</td><td>${formatRupiah(labaT)}</td></tr>
+        </table>
+      </div>
+      <div class="margin-info"><b>Margin Keuntungan:</b> ${margin}%</div>
     `;
 
   } else if (sektor === "perdagangan") {
-    // Patokan data dasar dinilai dari omset harian dasar senilai Rp 100.000 (kecuali dagang ikan per KG)
     let faktorOmset = subsektor === "dagang_ikan" ? valInput : valInput / 100000;
     
-    // Per Tahun dasar (Asumsi basis data tahunan di tabel user)
     let pendT = subsektor === "dagang_ikan" ? (itemData.pendapatan * faktorOmset * 360) : (itemData.pendapatan * faktorOmset);
     let prodT = itemData.produksi * faktorOmset * (subsektor === "dagang_ikan" ? 360 : 1);
     let hppT = itemData.hpp * faktorOmset;
@@ -100,7 +114,6 @@ function hitungEstimasi() {
     let totalBebanT = prodT + hppT + operT + nonOpT;
     let labaT = pendT - totalBebanT;
 
-    // Per Bulan (Bagi 12)
     let pendB = pendT / 12;
     let prodB = prodT / 12;
     let hppB = hppT / 12;
@@ -111,23 +124,24 @@ function hitungEstimasi() {
     let margin = pendT ? ((labaT / pendT) * 100).toFixed(2) : 0;
 
     htmlResult += `
-      <table>
-        <tr><th>Rincian</th><th>Per Bulan</th><th>Per Tahun</th></tr>
-        <tr><td>Biaya Produksi</td><td>${formatRupiah(prodB)}</td><td>${formatRupiah(prodT)}</td></tr>
-        <tr><td>HPP / Barang Terjual</td><td>${formatRupiah(hppB)}</td><td>${formatRupiah(hppT)}</td></tr>
-        <tr><td>Biaya Operasional</td><td>${formatRupiah(operB)}</td><td>${formatRupiah(operT)}</td></tr>
-        <tr><td>Biaya Non Operasional</td><td>${formatRupiah(nonOpB)}</td><td>${formatRupiah(nonOpT)}</td></tr>
-        <tr><td><b>Total Pengeluaran</b></td><td><b>${formatRupiah(totalBebanB)}</b></td><td><b>${formatRupiah(totalBebanT)}</b></td></tr>
-        <tr><td><b>Total Pendapatan (Omset)</b></td><td><b>${formatRupiah(pendB)}</b></td><td><b>${formatRupiah(pendT)}</b></td></tr>
-        <tr class="highlight-laba"><td>Laba Bersih</td><td>${formatRupiah(labaB)}</td><td>${formatRupiah(labaT)}</td></tr>
-      </table>
-      <p><b>Margin Keuntungan:</b> ${margin}%</p>
+      <div class="table-container">
+        <table>
+          <tr><th>Rincian</th><th>Per Bulan</th><th>Per Tahun</th></tr>
+          <tr><td>Biaya Produksi</td><td>${formatRupiah(prodB)}</td><td>${formatRupiah(prodT)}</td></tr>
+          <tr><td>HPP / Terjual</td><td>${formatRupiah(hppB)}</td><td>${formatRupiah(hppT)}</td></tr>
+          <tr><td>Biaya Operasional</td><td>${formatRupiah(operB)}</td><td>${formatRupiah(operT)}</td></tr>
+          <tr><td>Biaya Non Op</td><td>${formatRupiah(nonOpB)}</td><td>${formatRupiah(nonOpT)}</td></tr>
+          <tr style="font-weight:600; background:#f8fafc;"><td>Total Beban</td><td>${formatRupiah(totalBebanB)}</td><td>${formatRupiah(totalBebanT)}</td></tr>
+          <tr style="font-weight:600;"><td>Pendapatan (Omset)</td><td>${formatRupiah(pendB)}</td><td>${formatRupiah(pendT)}</td></tr>
+          <tr class="highlight-laba"><td>Laba Bersih</td><td>${formatRupiah(labaB)}</td><td>${formatRupiah(labaT)}</td></tr>
+        </table>
+      </div>
+      <div class="margin-info"><b>Margin Keuntungan:</b> ${margin}%</div>
     `;
 
   } else if (sektor === "peternakan") {
     let faktorTernak = valInput;
 
-    // Data patokan bawaan sudah per tahun untuk 1 ekor
     let upahT = itemData.upah * faktorTernak;
     let prodT = itemData.produksi * faktorTernak;
     let hppT = (itemData.hpp || 0) * faktorTernak;
@@ -137,7 +151,6 @@ function hitungEstimasi() {
     let totalBebanT = upahT + prodT + hppT + operT + nonOpT;
     let labaT = pendT - totalBebanT;
 
-    // Per Bulan
     let upahB = upahT / 12;
     let prodB = prodT / 12;
     let hppB = hppT / 12;
@@ -149,23 +162,27 @@ function hitungEstimasi() {
     let margin = pendT ? ((labaT / pendT) * 100).toFixed(2) : 0;
 
     htmlResult += `
-      <table>
-        <tr><th>Rincian</th><th>Per Bulan</th><th>Per Tahun</th></tr>
-        <tr><td>Biaya Produksi / Pembibitan</td><td>${formatRupiah(prodB + hppB)}</td><td>${formatRupiah(prodT + hppT)}</td></tr>
-        <tr><td>Biaya Operasional</td><td>${formatRupiah(operB)}</td><td>${formatRupiah(operT)}</td></tr>
-        <tr><td>Biaya Non Operasional</td><td>${formatRupiah(nonOpB)}</td><td>${formatRupiah(nonOpT)}</td></tr>
-        <tr><td><b>Total Pengeluaran</b></td><td><b>${formatRupiah(totalBebanB)}</b></td><td><b>${formatRupiah(totalBebanT)}</b></td></tr>
-        <tr><td><b>Total Pendapatan</b></td><td><b>${formatRupiah(pendB)}</b></td><td><b>${formatRupiah(pendT)}</b></td></tr>
-        <tr class="highlight-laba"><td>Laba Bersih</td><td>${formatRupiah(labaB)}</td><td>${formatRupiah(labaT)}</td></tr>
-      </table>
-      <p><b>Margin Keuntungan:</b> ${margin}%</p>
+      <div class="table-container">
+        <table>
+          <tr><th>Rincian</th><th>Per Bulan</th><th>Per Tahun</th></tr>
+          <tr><td>Biaya Produksi</td><td>${formatRupiah(prodB + hppB)}</td><td>${formatRupiah(prodT + hppT)}</td></tr>
+          <tr><td>Biaya Operasional</td><td>${formatRupiah(operB)}</td><td>${formatRupiah(operT)}</td></tr>
+          <tr><td>Biaya Non Op</td><td>${formatRupiah(nonOpB)}</td><td>${formatRupiah(nonOpT)}</td></tr>
+          <tr style="font-weight:600; background:#f8fafc;"><td>Total Beban</td><td>${formatRupiah(totalBebanB)}</td><td>${formatRupiah(totalBebanT)}</td></tr>
+          <tr style="font-weight:600;"><td>Pendapatan</td><td>${formatRupiah(pendB)}</td><td>${formatRupiah(pendT)}</td></tr>
+          <tr class="highlight-laba"><td>Laba Bersih</td><td>${formatRupiah(labaB)}</td><td>${formatRupiah(labaT)}</td></tr>
+        </table>
+      </div>
+      <div class="margin-info"><b>Margin Keuntungan:</b> ${margin}%</div>
     `;
   }
 
   outputDiv.innerHTML = htmlResult;
 }
 
-// Jalankan inisialisasi pertama kali halaman di-load
 window.onload = function() {
   updateSubSektor();
+  
+  // Pasang event listener ke input utama agar otomatis ngetik dengan format titik
+  document.getElementById("input-utama").addEventListener("input", formatInputRibuan);
 };
