@@ -1,1 +1,43 @@
-<!doctype html><html lang=id><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>Kalkulator SE PPL Desa Cidahu</title><link rel=stylesheet href=style.css></head><body><div class=app><h1>📊 Kalkulator SE PPL Desa Cidahu</h1><div class=card><label>Sektor</label><select id=sektor></select><label>Jenis Usaha</label><select id=usaha></select><label id=lbl>Jumlah</label><input id=jumlah type=number><div id=patokan></div><button onclick=hitung()>Hitung</button></div><div id=hasil></div></div><script src=database.js></script><script src=script.js></script></body></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator SE 2026</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">
+  <h1>📊 KALKULATOR SE 2026</h1>
+  <p>PPL DESA CIDAHU</p>
+</div>
+
+<div class="card">
+  <h2>📋 Parameter Input</h2>
+  
+  <label for="sektor">Pilih Sektor:</label>
+  <select id="sektor" onchange="updateSubSektor()">
+    <option value="pertanian">Pertanian</option>
+    <option value="perdagangan">Perdagangan</option>
+    <option value="peternakan">Peternakan</option>
+  </select>
+
+  <label for="subsektor" id="label-subsektor">Pilih Komoditas:</label>
+  <select id="subsektor"></select>
+
+  <label for="input-utama" id="label-input-utama">Luas Lahan (m²):</label>
+  <input id="input-utama" type="number" value="1000">
+
+  <button onclick="hitungEstimasi()">HITUNG ESTIMASI</button>
+</div>
+
+<div class="card">
+  <h2>💰 Hasil Analisis</h2>
+  <div id="output">Silahkan masukkan data dan klik Hitung Estimasi.</div>
+</div>
+
+<script src="database.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
