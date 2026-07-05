@@ -8,7 +8,7 @@ const dataPatokan = {
   perdagangan: {
     warung_eceran: { nama: "Warung Eceran", upah: 0, produksi: 0, hpp: 30600000, operasional: 1800000, nonop: 0, pendapatan: 36000000 },
     warung_makan: { nama: "Warung Makan/Minum", upah: 0, produksi: 18000000, hpp: 0, operasional: 5400000, nonop: 0, pendapatan: 36000000 },
-    dagang_ikan: { nama: "Perdagangan Ikan", upah: 0, produksi: 30000, hpp: 0, operasional: 2000, nonop: 0, pendapatan: 35000 } // Patokan per 1 KG, dihitung proporsional harian
+    dagang_ikan: { nama: "Perdagangan Ikan", upah: 0, produksi: 30000, hpp: 0, operasional: 2000, nonop: 0, pendapatan: 35000 }
   },
   peternakan: {
     domba_penggemukan: { nama: "Domba Penggemukan", upah: 0, produksi: 900000, hpp: 0, operasional: 365000, nonop: 0, pendapatan: 2500000 },
