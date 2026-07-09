@@ -2,49 +2,108 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Kalkulator SE 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Analisis Potensi Ekonomi Desa</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-  <div class="header">
-    <h1>📊 KALKULATOR SE 2026</h1>
-    <p>PPL DESA CIDAHU</p>
+  <div class="app-container">
+    <header class="app-header">
+      <h1>Analisis Ekonomi Desa</h1>
+      <p>Kalkulator Estimasi Potensi Komoditas per Tahun</p>
+    </header>
+
+    <main class="app-card">
+      <form id="calcForm" onsubmit="event.preventDefault();">
+        
+        <div class="form-group">
+          <label for="sektor">Pilih Sektor</label>
+          <select id="sektor" class="touch-input">
+            <option value="pertanian">Pertanian</option>
+            <option value="perdagangan">Perdagangan</option>
+            <option value="peternakan">Peternakan</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="komoditas">Pilih Komoditas</label>
+          <select id="komoditas" class="touch-input"></select>
+        </div>
+
+        <div class="form-group">
+          <label id="inputLabel" for="volumeInput">Luas Lahan (m²)</label>
+          <input type="text" id="volumeInput" class="touch-input" placeholder="Masukkan angka..." inputmode="numeric">
+        </div>
+
+        <button type="button" id="btnHitung" class="btn-primary">HITUNG ESTIMASI</button>
+      </form>
+
+      <!-- Area Output Hasil Analisis -->
+      <div id="resultSection" class="result-section hidden">
+        <h2>Hasil Analisis Proyeksi Per Tahun</h2>
+        
+        <div class="result-card-dashed">
+          <div class="result-item">
+            <span>Proyeksi Pendapatan Kotor</span>
+            <span id="resPendapatan" class="text-bold">Rp 0</span>
+          </div>
+          
+          <div class="result-item text-danger">
+            <span>Biaya Upah Kerja (-)</span>
+            <span id="resUpah">-Rp 0</span>
+          </div>
+          
+          <div class="result-item text-danger">
+            <span>Biaya Produksi (-)</span>
+            <span id="resProduksi">-Rp 0</span>
+          </div>
+          
+          <div class="result-item text-danger">
+            <span>Biaya Operasional (-)</span>
+            <span id="resOperasional">-Rp 0</span>
+          </div>
+          
+          <div class="result-item text-danger">
+            <span>Biaya Non-Operasional (-)</span>
+            <span id="resNonOp">-Rp 0</span>
+          </div>
+        </div>
+
+        <!-- Sorotan Laba Bersih / SHU -->
+        <div class="shu-box">
+          <span class="shu-title">Estimasi Laba Bersih (SHU / Tahun)</span>
+          <span id="resLabaBersih" class="shu-value">Rp 0</span>
+        </div>
+
+        <!-- Info Tambahan Khusus Sektor Pertanian -->
+        <div id="pertanianDetail" class="pertanian-detail hidden">
+          <h3>Detail Pendukung Teknis</h3>
+          <div class="detail-grid">
+            <div class="detail-box">
+              <span class="detail-label">Kebutuhan Pekerja</span>
+              <span id="resPekerja" class="detail-value-sub">0 Orang</span>
+            </div>
+            <div class="detail-box">
+              <span class="detail-label">Alokasi Hari Kerja</span>
+              <span id="resHariKerja" class="detail-value-sub">0 Hari</span>
+            </div>
+            <div class="detail-box full-width">
+              <span class="detail-label">Estimasi Hasil Panen</span>
+              <span id="resHasilPanen" class="detail-value-sub">0 Kg / Tahun</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <p>by Rafly Fachrezi Desa Cidahu</p>
+    </footer>
   </div>
 
-  <div class="card">
-    <h2>📋 Parameter Input</h2>
-    
-    <label for="sektor">Pilih Sektor:</label>
-    <select id="sektor" onchange="updateSubSektor()">
-      <option value="pertanian">Pertanian</option>
-      <option value="perdagangan">Perdagangan</option>
-      <option value="peternakan">Peternakan</option>
-    </select>
-
-    <label for="subsektor" id="label-subsektor">Pilih Komoditas:</label>
-    <select id="subsektor"></select>
-
-    <label for="input-utama" id="label-input-utama">Luas Lahan (m²):</label>
-    <!-- Diubah ke type text agar inputmask dengan titik berjalan lancar di hp -->
-    <input id="input-utama" type="text" value="1.000" inputmode="numeric">
-
-    <button onclick="hitungEstimasi()">HITUNG ESTIMASI</button>
-  </div>
-
-  <div class="card">
-    <h2>💰 Hasil Analisis</h2>
-    <div id="output" class="output-placeholder">Silahkan masukkan data dan klik Hitung Estimasi.</div>
-  </div>
-
-  <div class="watermark">
-    by Rafly Fachrezi Desa Cidahu
-  </div>
-</div>
-
-<script src="database.js"></script>
-<script src="script.js"></script>
+  <script src="database.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
