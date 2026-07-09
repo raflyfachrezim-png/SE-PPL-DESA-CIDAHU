@@ -1,175 +1,239 @@
-body{
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background:#f2f4f8;
-  margin:0;
-  padding:12px;
-  color: #333;
-}
-
-.container {
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.header{
-  text-align:center;
-  padding:20px 15px;
-  background:#1d4ed8;
-  color:white;
-  border-radius:12px;
-}
-
-.header h1 {
-  font-size: 20px;
-  margin: 0 0 5px 0;
-}
-
-.header p {
-  margin: 0;
-  font-size: 14px;
-  opacity: 0.9;
-}
-
-.card{
-  background:white;
-  padding:15px;
-  margin-top:12px;
-  border-radius:12px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.06);
-}
-
-.card h2 {
-  font-size: 16px;
-  margin-top: 0;
-  margin-bottom: 15px;
-  color: #1e293b;
-  border-bottom: 2px solid #f1f5f9;
-  padding-bottom: 8px;
-}
-
-label {
-  display: block;
-  margin-top: 12px;
-  font-weight: 600;
-  color: #475569;
-  font-size: 13px;
-}
-
-input, select{
-  width:100%;
-  padding:12px;
-  margin:6px 0 12px 0;
-  border-radius:8px;
-  border:1px solid #cbd5e1;
+/* style.css */
+* {
   box-sizing: border-box;
-  font-size: 15px;
-  background-color: #fff;
-  -webkit-appearance: none;
-  appearance: none;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-select {
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+body {
+  background-color: #f0f4f8;
+  color: #334e68;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.app-header {
+  text-align: center;
+  padding: 8px 0;
+}
+
+.app-header h1 {
+  font-size: 1.4rem;
+  color: #102a43;
+  margin-bottom: 4px;
+}
+
+.app-header p {
+  font-size: 0.85rem;
+  color: #627d98;
+}
+
+.app-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #486581;
+}
+
+/* Thumb-Zone Friendly Elements */
+.touch-input {
+  width: 100%;
+  height: 50px;
+  min-height: 48px;
+  padding: 0 16px;
+  font-size: 1rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  background-color: #f8fafc;
+  color: #1e293b;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.touch-input:focus {
+  border-color: #2563eb;
+  background-color: #ffffff;
+}
+
+select.touch-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23486581' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
   background-repeat: no-repeat;
-  background-position: right 12px center;
+  background-position: right 16px center;
   background-size: 16px;
   padding-right: 40px;
 }
 
-input:focus, select:focus {
-  outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-}
-
-button{
-  width:100%;
-  padding:14px;
-  background:linear-gradient(90deg,#16a34a,#2563eb);
-  color:white;
-  border:none;
-  border-radius:8px;
-  margin-top:8px;
-  font-weight:bold;
-  font-size: 15px;
+.btn-primary {
+  width: 100%;
+  height: 52px;
+  min-height: 48px;
+  background: linear-gradient(135deg, #1e40af, #2563eb);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
   cursor: pointer;
-  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+  transition: transform 0.1s ease, box-shadow 0.2s ease;
+  margin-top: 8px;
 }
 
-button:active {
-  transform: scale(0.98);
+/* Animasi Membal Sentuhan HP */
+.btn-primary:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
 }
 
-.table-container {
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin-top: 10px;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
+/* Result Section UI styling */
+.result-section {
+  margin-top: 24px;
+  border-top: 2px solid #e2e8f0;
+  padding-top: 20px;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-  min-width: 280px;
-}
-
-th, td {
-  padding: 10px 12px;
-  text-align: left;
-}
-
-th {
-  background-color: #f8fafc;
-  color: #64748b;
-  font-weight: 600;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-td {
-  border-bottom: 1px solid #f1f5f9;
-  color: #334155;
-}
-
-tr:last-child td {
-  border-bottom: none;
-}
-
-.highlight-laba {
-  background-color: #f0fdf4;
-  font-weight: bold;
-}
-
-.highlight-laba td {
-  color: #166534;
-}
-
-.margin-info {
-  margin-top: 12px;
-  font-size: 14px;
+.result-section h2 {
+  font-size: 1.1rem;
   color: #1e293b;
-  background: #f8fafc;
-  padding: 10px;
-  border-radius: 6px;
+  margin-bottom: 12px;
   text-align: center;
 }
 
-.output-placeholder {
-  color: #94a3b8;
-  text-align: center;
-  font-size: 14px;
-  padding: 10px 0;
+.result-card-dashed {
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #f8fafc;
 }
 
-.watermark {
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+.text-bold {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.text-danger {
+  color: #dc2626;
+}
+
+/* Boks Hijau Segar untuk SHU */
+.shu-box {
+  background-color: #f0fdf4;
+  border: 2px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 16px;
   text-align: center;
-  margin-top: 25px;
-  margin-bottom: 15px;
-  font-size: 11px;
-  color: #94a3b8;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.shu-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #166534;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
+}
+
+.shu-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #15803d;
+}
+
+/* Pertanian Detail Grid */
+.pertanian-detail {
+  margin-top: 20px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.pertanian-detail h3 {
+  font-size: 0.95rem;
+  color: #334155;
+  margin-bottom: 10px;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.detail-box {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.detail-box.full-width {
+  grid-column: span 2;
+}
+
+.detail-label {
+  font-size: 0.75rem;
+  color: #64748b;
   font-weight: 500;
+}
+
+.detail-value-sub {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.app-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: 8px;
 }
