@@ -59,13 +59,13 @@ const dataPatokan = {
     pikok: { 
       nama: "Pikok", 
       luas_patokan: 1000, 
-      upah: 7560000, 
-      produksi: 24600000, 
-      operasional: 12840000, 
+      upah: 2520000, 
+      produksi: 8200000, 
+      operasional: 4280000, 
       nonop: 0, 
-      pendapatan: 45000000, 
-      hasil_panen: 0, 
-      harga: 0, 
+      pendapatan: 27000000, 
+      hasil_panen: 900, 
+      harga: 30000, 
       pegawai: 3, 
       hari_kerja: 14 
     }
