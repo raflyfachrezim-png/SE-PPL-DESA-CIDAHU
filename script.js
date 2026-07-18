@@ -146,4 +146,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Jalankan inisialisasi awal saat aplikasi dibuka pertama kali
   updateFormUI();
+
+
+  // =======================================================================
+  // LOGIKA KELOLA PERSENTASE PROGRES ASESMEN (MANDIRI)
+  // =======================================================================
+  const TotalInput = document.getElementById("totalAssessment");
+  const MonitorSubmit = document.getElementById("monitorSubmit");
+  const MonitorReject = document.getElementById("monitorReject");
+  const MonitorApprove = document.getElementById("monitorApprove");
+  const PersenProgresText = document.getElementById("persenProgres");
+  const BelumDiprosesText = document.getElementById("belumDiproses");
+
+  // Fungsi Hitung Persentase Real-time
+  const hitungPersentaseOtomatis = () => {
+    const total = sanitizeInput(TotalInput.value);
+    const submit = sanitizeInput(MonitorSubmit.value);
+    const reject = sanitizeInput(MonitorReject.value);
+    const approve = sanitizeInput(MonitorApprove.value);
+
+    const totalDiproses = submit + reject + approve;
+    let progres = 0;
+    let sisa = 0;
+
+    if (total > 0) {
+      progres = (totalDiproses / total) * 100;
+      sisa = ((total - totalDiproses) / total) * 100;
+    }
+
+    PersenProgresText.textContent = progres.toFixed(0) + "%";
+    BelumDiprosesText.textContent = sisa.toFixed(0) + "%";
+  };
+
+  // Fungsi pembungkus untuk menerapkan Masking Ribuan sekaligus Hitung ulang
+  const applyMaskAndCalculate = (e) => {
+    const cursorPosition = e.target.selectionStart;
+    const originalLength = e.target.value.length;
+    
+    e.target.value = formatRibuan(e.target.value);
+    
+    const newLength = e.target.value.length;
+    e.target.setSelectionRange(cursorPosition + (newLength - originalLength), cursorPosition + (newLength - originalLength));
+    
+    hitungPersentaseOtomatis();
+  };
+
+  // Pasang Event Listener ke semua input monitoring baru
+  TotalInput.addEventListener("input", applyMaskAndCalculate);
+  MonitorSubmit.addEventListener("input", applyMaskAndCalculate);
+  MonitorReject.addEventListener("input", applyMaskAndCalculate);
+  MonitorApprove.addEventListener("input", applyMaskAndCalculate);
+
+  // Jalankan masking pertama kali untuk data default bawaan
+  TotalInput.value = formatRibuan(TotalInput.value);
+  MonitorSubmit.value = formatRibuan(MonitorSubmit.value);
+  MonitorReject.value = formatRibuan(MonitorReject.value);
+  MonitorApprove.value = formatRibuan(MonitorApprove.value);
+  
+  // Hitung perdana saat halaman di-load
+  hitungPersentaseOtomatis();
+  
 });
