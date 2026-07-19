@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Bersihkan Titik agar Aman untuk Operasi Matematika
   const sanitizeInput = (val) => {
     if (!val) return 0;
-    const cleanNumber = val.replace(/\./g, "");
+    const cleanNumber = val.toString().replace(/\./g, "");
     return parseFloat(cleanNumber) || 0;
   };
 
@@ -149,33 +149,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =======================================================================
-  // LOGIKA KELOLA PERSENTASE PROGRES ASESMEN (MANDIRI)
+  // LOGIKA KELOLA PERSENTASE PROGRES ASESMEN (VERSI FINAL FIX)
   // =======================================================================
   const TotalInput = document.getElementById("totalAssessment");
   const MonitorSubmit = document.getElementById("monitorSubmit");
-  const MonitorReject = document.getElementById("monitorReject");
   const MonitorApprove = document.getElementById("monitorApprove");
+  const MonitorReject = document.getElementById("monitorReject");
+  
   const PersenProgresText = document.getElementById("persenProgres");
-  const BelumDiprosesText = document.getElementById("belumDiproses");
+  const PersenApproveText = document.getElementById("persenApprove");
+  const PersenRejectText = document.getElementById("persenReject");
+  
+  const SisaOutstandingText = document.getElementById("sisaOutstanding");
+  const SisaBelumTercapaiText = document.getElementById("sisaBelumTercapai");
 
-  // Fungsi Hitung Persentase Real-time
+  // Fungsi Hitung Persentase Real-time & Sisa Riil
   const hitungPersentaseOtomatis = () => {
     const total = sanitizeInput(TotalInput.value);
     const submit = sanitizeInput(MonitorSubmit.value);
-    const reject = sanitizeInput(MonitorReject.value);
     const approve = sanitizeInput(MonitorApprove.value);
+    const reject = sanitizeInput(MonitorReject.value);
 
-    const totalDiproses = submit + reject + approve;
-    let progres = 0;
-    let sisa = 0;
+    // 1. Total data yang sudah dieksekusi/proses (Submit + Approve + Reject)
+    const totalDiproses = submit + approve + reject;
 
+    // 2. Hitung Persentase Total Progres Kerja dibanding Target Awal
+    let progresKerja = 0;
     if (total > 0) {
-      progres = (totalDiproses / total) * 100;
-      sisa = ((total - totalDiproses) / total) * 100;
+      progresKerja = (totalDiproses / total) * 100;
     }
 
-    PersenProgresText.textContent = progres.toFixed(0) + "%";
-    BelumDiprosesText.textContent = sisa.toFixed(0) + "%";
+    // 3. Hitung Rasio Masing-Masing Status dari Jumlah Target Total
+    let rasioApprove = 0;
+    let rasioReject = 0;
+    if (total > 0) {
+      rasioApprove = (approve / total) * 100;
+      rasioReject = (reject / total) * 100;
+    }
+
+    // 4. Logika Sisa Riil Data Mentah (Bener-bener yang belum diapa-apain)
+    const sisaMurni = total - totalDiproses; 
+
+    // Tampilkan data ke teks dashboard
+    PersenProgresText.textContent = progresKerja.toFixed(1) + "%";
+    PersenApproveText.textContent = rasioApprove.toFixed(1) + "%";
+    PersenRejectText.textContent = rasioReject.toFixed(1) + "%";
+
+    // Validasi agar tidak menampilkan angka minus jika input melebihi target
+    SisaOutstandingText.textContent = (sisaMurni >= 0 ? sisaMurni : 0).toLocaleString("id-ID");
+    SisaBelumTercapaiText.textContent = totalDiproses.toLocaleString("id-ID");
   };
 
   // Fungsi pembungkus untuk menerapkan Masking Ribuan sekaligus Hitung ulang
@@ -194,14 +216,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Pasang Event Listener ke semua input monitoring baru
   TotalInput.addEventListener("input", applyMaskAndCalculate);
   MonitorSubmit.addEventListener("input", applyMaskAndCalculate);
-  MonitorReject.addEventListener("input", applyMaskAndCalculate);
   MonitorApprove.addEventListener("input", applyMaskAndCalculate);
+  MonitorReject.addEventListener("input", applyMaskAndCalculate);
 
   // Jalankan masking pertama kali untuk data default bawaan
   TotalInput.value = formatRibuan(TotalInput.value);
   MonitorSubmit.value = formatRibuan(MonitorSubmit.value);
-  MonitorReject.value = formatRibuan(MonitorReject.value);
   MonitorApprove.value = formatRibuan(MonitorApprove.value);
+  MonitorReject.value = formatRibuan(MonitorReject.value);
   
   // Hitung perdana saat halaman di-load
   hitungPersentaseOtomatis();
