@@ -103,14 +103,14 @@
     </footer>
   </div>
 
-  <!-- KOTAK MONITORING PROGRES ASESMEN (IKUT STYLE CSS ASLI) -->
-  <div class="app-container" style="margin-top: 25px;">
+  <!-- KOTAK MONITORING PROGRES ASESMEN (VERSI FINAL LOGIKA & LAYOUT) -->
+  <div class="app-container" style="margin-top: 25px; margin-bottom: 50px;">
     <main class="app-card">
       <h2>Monitoring Progres Asesmen</h2>
       <form id="progressForm" onsubmit="event.preventDefault();" style="margin-top: 15px;">
         
         <div class="form-group">
-          <label for="totalAssessment">Total Assessment (Target 100%):</label>
+          <label for="totalAssessment">Total Assessment (Target):</label>
           <input type="text" id="totalAssessment" class="touch-input" placeholder="Contoh: 100" inputmode="numeric" value="100">
         </div>
 
@@ -120,26 +120,45 @@
         </div>
 
         <div class="form-group">
-          <label for="monitorReject">Jumlah Reject:</label>
-          <input type="text" id="monitorReject" class="touch-input" placeholder="Contoh: 10" inputmode="numeric" value="10">
+          <label for="monitorApprove">Jumlah Approve:</label>
+          <input type="text" id="monitorApprove" class="touch-input" placeholder="Contoh: 20" inputmode="numeric" value="20">
         </div>
 
         <div class="form-group">
-          <label for="monitorApprove">Jumlah Approve:</label>
-          <input type="text" id="monitorApprove" class="touch-input" placeholder="Contoh: 20" inputmode="numeric" value="20">
+          <label for="monitorReject">Jumlah Reject:</label>
+          <input type="text" id="monitorReject" class="touch-input" placeholder="Contoh: 10" inputmode="numeric" value="10">
         </div>
 
       </form>
 
       <div class="result-section" style="margin-top: 20px;">
-        <div class="result-card-dashed">
+        <!-- BARIS ATAS: Rasio Capaian Persentase -->
+        <h3>Rasio Capaian (%)</h3>
+        <div class="result-card-dashed" style="margin-bottom: 20px;">
           <div class="result-item">
-            <span>Persentase Progres</span>
-            <span id="persenProgres" class="text-bold" style="color: #15803d; font-size: 1.25rem;">0%</span>
+            <span>Total Progres Diproses</span>
+            <span id="persenProgres" class="text-bold" style="color: #2563eb; font-size: 1.25rem;">0%</span>
           </div>
           <div class="result-item">
-            <span>Belum Diproses</span>
-            <span id="belumDiproses" class="text-bold" style="color: #dc2626; font-size: 1.25rem;">0%</span>
+            <span>Rasio Approval</span>
+            <span id="persenApprove" class="text-bold" style="color: #16a34a; font-size: 1.25rem;">0%</span>
+          </div>
+          <div class="result-item">
+            <span>Rasio Rejection</span>
+            <span id="persenReject" class="text-bold" style="color: #dc2626; font-size: 1.25rem;">0%</span>
+          </div>
+        </div>
+
+        <!-- BARIS BAWAH: Jumlah Data Riil (Turun ke bawah biar gak spill) -->
+        <h3>Detail Jumlah Data (Item)</h3>
+        <div class="result-card-dashed" style="background-color: #fafafa;">
+          <div class="result-item">
+            <span>Sisa Data Mentah (Belum Disentuh)</span>
+            <span id="sisaOutstanding" class="text-bold" style="color: #d97706; font-size: 1.25rem;">0</span>
+          </div>
+          <div class="result-item">
+            <span>Total Data Sudah Diproses</span>
+            <span id="sisaBelumTercapai" class="text-bold" style="color: #7c3aed; font-size: 1.25rem;">0</span>
           </div>
         </div>
       </div>
