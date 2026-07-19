@@ -8,12 +8,15 @@
 </head>
 <body>
 
-  <div class="app-container">
+  <!-- SEMUA DIJADIKAN SATU DI DALAM APP-CONTAINER UTAMA -->
+  <div class="app-container" style="display: flex; flex-direction: column; gap: 25px;">
+    
     <header class="app-header">
       <h1>Analisis Ekonomi Desa</h1>
       <p>Kalkulator Estimasi Potensi Komoditas per Tahun</p>
     </header>
 
+    <!-- KOTAK 1: ANALISIS EKONOMI DESA -->
     <main class="app-card">
       <form id="calcForm" onsubmit="event.preventDefault();">
         
@@ -98,13 +101,7 @@
       </div>
     </main>
 
-    <footer class="app-footer">
-      <p>by Rafly Fachrezi Desa Cidahu</p>
-    </footer>
-  </div>
-
-  <!-- KOTAK MONITORING PROGRES ASESMEN (VERSI FINAL LOGIKA & LAYOUT) -->
-  <div class="app-container" style="margin-top: 25px; margin-bottom: 50px;">
+    <!-- KOTAK 2: MONITORING PROGRES ASESMEN (PASTI DI BAWAH KOTAK 1) -->
     <main class="app-card">
       <h2>Monitoring Progres Asesmen</h2>
       <form id="progressForm" onsubmit="event.preventDefault();" style="margin-top: 15px;">
@@ -149,7 +146,7 @@
           </div>
         </div>
 
-        <!-- BARIS BAWAH: Jumlah Data Riil (Turun ke bawah biar gak spill) -->
+        <!-- BARIS BAWAH: Detail Jumlah Data Riil -->
         <h3>Detail Jumlah Data (Item)</h3>
         <div class="result-card-dashed" style="background-color: #fafafa;">
           <div class="result-item">
@@ -163,6 +160,11 @@
         </div>
       </div>
     </main>
+
+    <footer class="app-footer" style="margin-top: 20px; margin-bottom: 30px;">
+      <p>by Rafly Fachrezi Desa Cidahu</p>
+    </footer>
+
   </div>
 
   <script src="database.js"></script>
