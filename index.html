@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kalkulator Analisis Potensi Ekonomi Desa</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Style sederhana untuk watermark pemisah */
+    .watermark-divider {
+      text-align: center;
+      padding: 10px 0;
+      user-select: none;
+      pointer-events: none;
+    }
+    .watermark-text {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(156, 163, 175, 0.4); /* Warna abu-abu soft samar */
+    }
+  </style>
 </head>
 <body>
 
@@ -101,6 +117,11 @@
       </div>
     </main>
 
+    <!-- ELEMEN WATERMARK DI ANTARA KOTAK 1 DAN KOTAK 2 -->
+    <div class="watermark-divider">
+      <span class="watermark-text">BILA CANTIK</span>
+    </div>
+
     <!-- KOTAK 2: MONITORING PROGRES ASESMEN (PASTI DI BAWAH KOTAK 1) -->
     <main class="app-card">
       <h2>Monitoring Progres Asesmen</h2>
@@ -162,7 +183,7 @@
     </main>
 
     <footer class="app-footer" style="margin-top: 20px; margin-bottom: 30px;">
-      <p>bila cantik</p>
+      <p>By Rafly Fachrezi</p>
     </footer>
 
   </div>
