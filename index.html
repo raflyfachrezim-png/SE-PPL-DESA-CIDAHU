@@ -50,6 +50,12 @@
           <select id="komoditas" class="touch-input"></select>
         </div>
 
+        <!-- WADAH BARU: TAMPILAN PATOKAN KBLI -->
+        <div id="kbliContainer" class="kbli-box hidden">
+          <span class="kbli-label">Patokan KBLI:</span>
+          <span id="kbliText" class="kbli-value">-</span>
+        </div>
+
         <div class="form-group">
           <label id="inputLabel" for="volumeInput">Luas Lahan (m²)</label>
           <input type="text" id="volumeInput" class="touch-input" placeholder="Masukkan angka..." inputmode="numeric">
@@ -94,7 +100,7 @@
           <span class="shu-title">Estimasi Laba Bersih (SHU / Tahun)</span>
           <span id="resLabaBersih" class="shu-value">Rp 0</span>
 
-          <!-- BARIS BARU: ESTIMASI PER BULAN -->
+          <!-- BARIS ESTIMASI PER BULAN -->
           <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,0.3); width: 100%;">
             <span class="shu-title" style="font-size: 0.85rem;">Estimasi Laba Bersih per Bulan</span>
             <span id="resLabaBulan" class="shu-value" style="font-size: 1.25rem;">Rp 0 / Bulan</span>
@@ -128,7 +134,7 @@
       <span class="watermark-text">MAS BASIR GANTENG</span>
     </div>
 
-    <!-- KOTAK 2: MONITORING PROGRES ASESMEN (PASTI DI BAWAH KOTAK 1) -->
+    <!-- KOTAK 2: MONITORING PROGRES ASESMEN -->
     <main class="app-card">
       <h2>Monitoring Progres Asesmen</h2>
       <form id="progressForm" onsubmit="event.preventDefault();" style="margin-top: 15px;">
