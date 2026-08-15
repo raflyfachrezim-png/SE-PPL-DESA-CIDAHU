@@ -105,6 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalPengeluaran = proyeksiUpah + proyeksiProduksi + proyeksiOperasional + proyeksiNonOp;
     const labaBersih = proyeksiPendapatan - totalPengeluaran;
 
+    // =======================================================================
+    // PERHITUNGAN LABA BERSIH PER BULAN (DIBAGI 12)
+    // =======================================================================
+    const labaBersihBulan = labaBersih / 12;
+
     // Render Output Finansial ke UI
     document.getElementById("resPendapatan").textContent = formatRupiah(proyeksiPendapatan);
     document.getElementById("resUpah").textContent = formatRupiah(proyeksiUpah ? -proyeksiUpah : 0);
@@ -112,14 +117,23 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("resOperasional").textContent = formatRupiah(proyeksiOperasional ? -proyeksiOperasional : 0);
     document.getElementById("resNonOp").textContent = formatRupiah(proyeksiNonOp ? -proyeksiNonOp : 0);
     
+    // Render Laba Per Tahun
     const labaElement = document.getElementById("resLabaBersih");
     labaElement.textContent = formatRupiah(labaBersih);
+
+    // Render Laba Per Bulan
+    const labaBulanElement = document.getElementById("resLabaBulan");
+    if (labaBulanElement) {
+      labaBulanElement.textContent = `${formatRupiah(labaBersihBulan)} / Bulan`;
+    }
 
     // Kustomisasi warna teks SHU jika minus (antisipasi kerugian uji coba)
     if (labaBersih < 0) {
       labaElement.style.color = "#dc2626";
+      if (labaBulanElement) labaBulanElement.style.color = "#f87171"; // Warna merah soft untuk bulan
     } else {
       labaElement.style.color = "#15803d";
+      if (labaBulanElement) labaBulanElement.style.color = "#ffffff"; // Warna putih bersih
     }
 
     // Variabel Teknis Tambahan khusus sektor Pertanian
