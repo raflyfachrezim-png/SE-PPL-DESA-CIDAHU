@@ -6,6 +6,7 @@ const dataPatokan = {
   pertanian: {
     padi: { 
       nama: "Padi", 
+      kbli: "01121 - Pertanian Padi Sawah",
       luas_patokan: 1000, 
       upah: 7560000, 
       produksi: 6300000, 
@@ -19,6 +20,7 @@ const dataPatokan = {
     },
     sawi: { 
       nama: "Sawi", 
+      kbli: "01131 - Pertanian Sayuran Daun",
       luas_patokan: 1000, 
       upah: 10080000, 
       produksi: 10800000, 
@@ -32,6 +34,7 @@ const dataPatokan = {
     },
     timun: { 
       nama: "Timun", 
+      kbli: "01133 - Pertanian Sayuran Buah",
       luas_patokan: 1000, 
       upah: 30000000, 
       produksi: 70600000, 
@@ -45,6 +48,7 @@ const dataPatokan = {
     },
     cabe: { 
       nama: "Cabe", 
+      kbli: "01138 - Pertanian Cabe",
       luas_patokan: 1000, 
       upah: 6000000, 
       produksi: 46000000, 
@@ -58,6 +62,7 @@ const dataPatokan = {
     },
     pikok: { 
       nama: "Pikok", 
+      kbli: "01193 - Pertanian Bunga Pucuk/Pikok",
       luas_patokan: 1000, 
       upah: 2520000, 
       produksi: 8200000, 
@@ -73,6 +78,7 @@ const dataPatokan = {
   perdagangan: {
     warung_eceran: { 
       nama: "Warung Eceran", 
+      kbli: "47112 - Perdagangan Eceran Barangan Kelontong",
       patokan: 100000, 
       upah: 0, 
       produksi: 30600000, 
@@ -83,6 +89,7 @@ const dataPatokan = {
     },
     warung_makan: { 
       nama: "Warung Makan/Minum", 
+      kbli: "56102 - Warung Makan dan Kedai Makanan",
       patokan: 100000, 
       upah: 0, 
       produksi: 18000000, 
@@ -93,9 +100,10 @@ const dataPatokan = {
     },
     dagang_ikan: { 
       nama: "Perdagangan Ikan", 
+      kbli: "47214 - Perdagangan Eceran Hasil Perikanan",
       patokan: 1, 
       upah: 0, 
-      produksi: 30000, 
+      produksi: 3000, 
       operasional: 2000, 
       nonop: 0, 
       pendapatan: 35000, 
@@ -105,6 +113,7 @@ const dataPatokan = {
   peternakan: {
     domba_penggemukan: { 
       nama: "Domba Penggemukan", 
+      kbli: "01441 - Pembesaran/Penggemukan Domba",
       patokan: 1, 
       upah: 0, 
       produksi: 900000, 
@@ -115,6 +124,7 @@ const dataPatokan = {
     },
     domba_pembibitan: { 
       nama: "Domba Pembibitan", 
+      kbli: "01442 - Pembibitan dan Budidaya Domba",
       patokan: 1, 
       upah: 0, 
       produksi: 365000, 
@@ -125,6 +135,7 @@ const dataPatokan = {
     },
     sapi_penggemukan: { 
       nama: "Sapi Penggemukan", 
+      kbli: "01411 - Pembesaran/Penggemukan Sapi Potong",
       patokan: 1, 
       upah: 0, 
       produksi: 15000000, 
