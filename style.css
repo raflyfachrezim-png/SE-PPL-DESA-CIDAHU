@@ -1,4 +1,4 @@
-/* style.css */
+/* style.css - FINAL REVISION */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -61,6 +61,23 @@ body {
   color: #486581;
 }
 
+/* Badge KBLI Tambahan (Dinamis) */
+.kbli-badge-container {
+  margin-top: -8px;
+  margin-bottom: 12px;
+}
+
+.kbli-badge {
+  display: inline-block;
+  background-color: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
 /* Thumb-Zone Friendly Elements */
 .touch-input {
   width: 100%;
@@ -73,12 +90,13 @@ body {
   background-color: #f8fafc;
   color: #1e293b;
   outline: none;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .touch-input:focus {
   border-color: #2563eb;
   background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 select.touch-input {
@@ -153,7 +171,7 @@ select.touch-input {
   color: #dc2626;
 }
 
-/* Boks Hijau Segar untuk SHU */
+/* Boks Hijau Segar untuk SHU & Laba Bulanan */
 .shu-box {
   background-color: #f0fdf4;
   border: 2px solid #bbf7d0;
@@ -178,6 +196,13 @@ select.touch-input {
   font-size: 1.6rem;
   font-weight: 800;
   color: #15803d;
+}
+
+.shu-subvalue {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #16a34a;
+  margin-top: 2px;
 }
 
 /* Pertanian Detail Grid */
@@ -227,6 +252,56 @@ select.touch-input {
   color: #1e293b;
 }
 
+/* =======================================================================
+   DASHBOARD MONITORING ASESMEN STYLING
+   ======================================================================= */
+.monitoring-card {
+  margin-top: 8px;
+}
+
+.monitoring-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.monitor-stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+}
+
+.stat-label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.text-success {
+  color: #16a34a;
+}
+
+.text-warning {
+  color: #d97706;
+}
+
+/* Helper Class */
 .hidden {
   display: none !important;
 }
