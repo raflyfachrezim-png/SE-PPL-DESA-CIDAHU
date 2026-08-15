@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (labaBulanElement) labaBulanElement.style.color = "#f87171"; // Warna merah soft untuk bulan
     } else {
       labaElement.style.color = "#15803d";
-      if (labaBulanElement) labaBulanElement.style.color = "#ffffff"; // Warna putih bersih
+      if (labaBulanElement) labaBulanElement.style.color = "#15803d"; // Warna putih bersih
     }
 
     // Variabel Teknis Tambahan khusus sektor Pertanian
