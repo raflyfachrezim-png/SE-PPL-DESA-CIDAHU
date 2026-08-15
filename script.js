@@ -1,5 +1,6 @@
 // script.js
 document.addEventListener("DOMContentLoaded", () => {
+  // === SELEKTOR ELEMEN KALKULATOR UTAMA ===
   const SektorSelect = document.getElementById("sektor");
   const KomoditasSelect = document.getElementById("komoditas");
   const InputLabel = document.getElementById("inputLabel");
@@ -7,6 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const BtnHitung = document.getElementById("btnHitung");
   const ResultSection = document.getElementById("resultSection");
   const PertanianDetail = document.getElementById("pertanianDetail");
+
+  // Selektor Badge KBLI
+  const KbliContainer = document.getElementById("kbliContainer");
+  const KbliText = document.getElementById("kbliText");
 
   // Format Angka ke Rupiah Terformat (Tanpa Sen)
   const formatRupiah = (angka) => {
@@ -41,6 +46,24 @@ document.addEventListener("DOMContentLoaded", () => {
     e.target.setSelectionRange(cursorPosition + (newLength - originalLength), cursorPosition + (newLength - originalLength));
   });
 
+  // LOGIKA UPDATE INFO KBLI OTOMATIS
+  const updateKbliInfo = () => {
+    const sektor = SektorSelect.value;
+    const komoditas = KomoditasSelect.value;
+
+    if (sektor && komoditas && dataPatokan[sektor]?.[komoditas]) {
+      const data = dataPatokan[sektor][komoditas];
+      if (data.kbli && KbliContainer && KbliText) {
+        KbliText.textContent = data.kbli;
+        KbliContainer.classList.remove("hidden");
+      } else if (KbliContainer) {
+        KbliContainer.classList.add("hidden");
+      }
+    } else if (KbliContainer) {
+      KbliContainer.classList.add("hidden");
+    }
+  };
+
   // Sinkronisasi Dropdown Komoditas & Perubahan Label Berdasarkan Sektor
   const updateFormUI = () => {
     const sektorPilihan = SektorSelect.value;
@@ -71,10 +94,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // Reset view hasil tiap kali konfigurasi form berganti
     ResultSection.classList.add("hidden");
     VolumeInput.value = "";
+
+    // Update KBLI saat sektor/form di-update
+    updateKbliInfo();
   };
 
-  // Event listener saat Sektor diganti
+  // Event listener saat Sektor & Komoditas diganti
   SektorSelect.addEventListener("change", updateFormUI);
+  KomoditasSelect.addEventListener("change", updateKbliInfo);
 
   // Eksekusi Logika Utama Hitung Potensi Ekonomi
   BtnHitung.addEventListener("click", () => {
@@ -133,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (labaBulanElement) labaBulanElement.style.color = "#f87171"; // Warna merah soft untuk bulan
     } else {
       labaElement.style.color = "#15803d";
-      if (labaBulanElement) labaBulanElement.style.color = "#15803d"; // Warna putih bersih
+      if (labaBulanElement) labaBulanElement.style.color = "#15803d"; // Warna hijau segar
     }
 
     // Variabel Teknis Tambahan khusus sektor Pertanian
@@ -160,7 +187,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Jalankan inisialisasi awal saat aplikasi dibuka pertama kali
   updateFormUI();
-
 
   // =======================================================================
   // LOGIKA KELOLA PERSENTASE PROGRES ASESMEN (VERSI FINAL FIX)
@@ -241,5 +267,4 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Hitung perdana saat halaman di-load
   hitungPersentaseOtomatis();
-  
 });
