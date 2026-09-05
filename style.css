@@ -1,4 +1,4 @@
-/* style.css - FINAL REVISION */
+/* style.css - FINAL REVISION WITH BLUE WATERMARK */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -299,6 +299,24 @@ select.touch-input {
 
 .text-warning {
   color: #d97706;
+}
+
+/* =======================================================================
+   WATERMARK PEMISAH (WARNA BIRU TOMBOL)
+   ======================================================================= */
+.watermark-divider {
+  text-align: center;
+  padding: 10px 0;
+  user-select: none;
+  pointer-events: none;
+}
+
+.watermark-text {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #2563eb; /* Warna biru senada dengan tombol Hitung */
 }
 
 /* Helper Class */
