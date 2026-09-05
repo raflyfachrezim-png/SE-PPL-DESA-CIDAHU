@@ -5,26 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kalkulator Analisis Potensi Ekonomi Desa</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* Style sederhana untuk watermark pemisah */
-    .watermark-divider {
-      text-align: center;
-      padding: 10px 0;
-      user-select: none;
-      pointer-events: none;
-    }
-    .watermark-text {
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(156, 163, 175, 0.4); /* Warna abu-abu soft samar */
-    }
-  </style>
 </head>
 <body>
 
-  <!-- SEMUA DIJADIKAN SATU DI DALAM APP-CONTAINER UTAMA -->
   <div class="app-container" style="display: flex; flex-direction: column; gap: 25px;">
     
     <header class="app-header">
@@ -50,7 +33,6 @@
           <select id="komoditas" class="touch-input"></select>
         </div>
 
-        <!-- WADAH BARU: TAMPILAN PATOKAN KBLI -->
         <div id="kbliContainer" class="kbli-box hidden">
           <span class="kbli-label">Patokan KBLI:</span>
           <span id="kbliText" class="kbli-value">-</span>
@@ -64,7 +46,6 @@
         <button type="button" id="btnHitung" class="btn-primary">HITUNG ESTIMASI</button>
       </form>
 
-      <!-- Area Output Hasil Analisis -->
       <div id="resultSection" class="result-section hidden">
         <h2>Hasil Analisis Proyeksi Per Tahun</h2>
         
@@ -95,19 +76,16 @@
           </div>
         </div>
 
-        <!-- Sorotan Laba Bersih / SHU (Tahun & Bulan) -->
         <div class="shu-box">
           <span class="shu-title">Estimasi Laba Bersih (SHU / Tahun)</span>
           <span id="resLabaBersih" class="shu-value">Rp 0</span>
 
-          <!-- BARIS ESTIMASI PER BULAN -->
           <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,0.3); width: 100%;">
             <span class="shu-title" style="font-size: 0.85rem;">Estimasi Laba Bersih per Bulan</span>
             <span id="resLabaBulan" class="shu-value" style="font-size: 1.25rem;">Rp 0 / Bulan</span>
           </div>
         </div>
 
-        <!-- Info Tambahan Khusus Sektor Pertanian -->
         <div id="pertanianDetail" class="pertanian-detail hidden">
           <h3>Detail Pendukung Teknis</h3>
           <div class="detail-grid">
@@ -129,7 +107,7 @@
       </div>
     </main>
 
-    <!-- ELEMEN WATERMARK DI ANTARA KOTAK 1 DAN KOTAK 2 -->
+    <!-- WATERMARK -->
     <div class="watermark-divider">
       <span class="watermark-text">BILA CANTIK BANGET BAPEE GANTENG BANGET</span>
     </div>
@@ -162,7 +140,6 @@
       </form>
 
       <div class="result-section" style="margin-top: 20px;">
-        <!-- BARIS ATAS: Rasio Capaian Persentase -->
         <h3>Rasio Capaian (%)</h3>
         <div class="result-card-dashed" style="margin-bottom: 20px;">
           <div class="result-item">
@@ -179,7 +156,6 @@
           </div>
         </div>
 
-        <!-- BARIS BAWAH: Detail Jumlah Data Riil -->
         <h3>Detail Jumlah Data (Item)</h3>
         <div class="result-card-dashed" style="background-color: #fafafa;">
           <div class="result-item">
