@@ -1,4 +1,4 @@
-/* style.css - FINAL REVISION WITH BLUE WATERMARK */
+/* style.css - FINAL MODERN REVISION */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -302,21 +302,37 @@ select.touch-input {
 }
 
 /* =======================================================================
-   WATERMARK PEMISAH (WARNA BIRU TOMBOL)
+   WATERMARK DIVIDER - BOLD & ELEGANT PILL BADGE
    ======================================================================= */
 .watermark-divider {
-  text-align: center;
-  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 4px 0;
   user-select: none;
   pointer-events: none;
 }
 
+.watermark-divider::before,
+.watermark-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #cbd5e1, transparent);
+}
+
 .watermark-text {
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 2px;
+  font-size: 0.72rem;
+  font-weight: 800; /* Tetap BOLD dan tegas */
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #2563eb; /* Warna biru senada dengan tombol Hitung */
+  color: #334e68; /* Senada dengan font utama aplikasi */
+  background-color: #e2e8f0; /* Kapsul soft netral */
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
 
 /* Helper Class */
